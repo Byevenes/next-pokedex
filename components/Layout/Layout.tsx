@@ -1,3 +1,4 @@
+import { useTheme } from "@nextui-org/react";
 import Head from "next/head"
 import { FC, PropsWithChildren } from "react"
 import { Navbar } from '../Ui/Navbar';
@@ -7,6 +8,7 @@ interface Props extends PropsWithChildren {
 }
 
 export const Layout: FC<Props> = ({ children, title = 'Pokemon App' }) => {
+  const { theme } = useTheme()
   return (
     <>
       <Head>
@@ -18,7 +20,7 @@ export const Layout: FC<Props> = ({ children, title = 'Pokemon App' }) => {
 
       <Navbar />
 
-      <main style={{ padding: '0px 20px' }}>
+      <main style={{ padding: '0px 20px', backgroundColor: theme?.colors.gray500.value }}>
         {children}
       </main>
     </>

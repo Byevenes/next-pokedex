@@ -4,6 +4,9 @@ const nextConfig = {
   swcMinify: true,
   images: {
     domains: ['raw.githubusercontent.com']
+  },
+  experimental: {
+    largePageDataBytes: 220 * 100000,
   }
 }
 
