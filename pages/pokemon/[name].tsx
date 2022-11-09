@@ -6,7 +6,7 @@ import Image from 'next/image'
 import { pokeApi } from '../../api'
 import { Layout } from '../../components/Layout'
 import { Pokemon, PokemonListResponse } from '../../interfaces'
-import { getPokemonInfo, localFavorites } from '../../utils'
+import { getPokemonInfo, localFavorites, useMediaQuery } from '../../utils'
 import confetti from 'canvas-confetti'
 
 interface Props {
@@ -15,6 +15,7 @@ interface Props {
 
 const PokemonPage: NextPage<Props> = ({ pokemon }) => {
   const [isPokemonFav, setIsPokemonFav] = useState(localFavorites.isPokemonFav(pokemon.id))
+  const isMd = useMediaQuery(960);
 
   const onToogleFavorite = async () => {
     localFavorites.toggleFavorite(pokemon.id)
@@ -49,7 +50,7 @@ const PokemonPage: NextPage<Props> = ({ pokemon }) => {
         </Grid>
         <Grid xs={12} sm={8}>
           <Card>
-            <Card.Header css={{ display: 'flex', justifyContent: 'space-between' }}>
+            <Card.Header css={{ display: 'flex', flexDirection: isMd ? 'column' : 'row', justifyContent: 'space-between' }}>
               <Text h1 transform='capitalize'>{pokemon.name}</Text>
               <Button onClick={onToogleFavorite} color={'gradient'} ghost >
                 {isPokemonFav ? 'Eliminar de favoritos' : ' Guardar en favoritos'}
